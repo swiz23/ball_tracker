@@ -1,0 +1,8 @@
+<launch>
+    
+    <node name="image_converter" pkg="ball_tracker" type="cam_listener.py"> </node>
+    
+    <node name="servo_controller" pkg="ball_tracker" type="servo_move.py"> </node>
+
+
+</launch>
