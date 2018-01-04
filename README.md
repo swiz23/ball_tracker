@@ -17,7 +17,9 @@ Created by Solomon Wiznitzer during the Hackathon at Northwestern University
 ### Image Processing
 
 **Node:** `image_converter` from the [cam_listener.py](src/cam_listener.py) script
+
 **Subscriber:** `usb_cam/image_raw` as `sensor_msgs/Image` message definition
+
 **Publishes to topic:** `ball_center` as `geometry_msgs/Point` message definition
 
 To track the red ball, each incoming frame (converted from a ROS image to an OpenCV image using CVBridge) from the camera is first converted to the HSV color-space. Using OpenCV's `cv2.inRange` function, a mask is generated so that only pixels that have values within a prespecified range are shown. For this project, the range was:
@@ -29,7 +31,8 @@ Then, OpenCV's `cv2.findContours` function is used to find the largest contour i
 
 ### Servomotor Control
 
-**Node**: `servo_controller` from the [servo_move.py](src/servo_move.py) script
+**Node:** `servo_controller` from the [servo_move.py](src/servo_move.py) script
+
 **Subscriber:** `ball_center` as `geometry_msgs/Point` message definition
 
 This node subtracts the 'x' and 'y' coordinates that define the center of the camera frame from the 'x' and 'y' values that define the centroid of the red ball. If the resulting values are below a certain threshold, nothing happens so as to prevent the camera from jittering too much. However, if the difference in 'x' is greater than the threshold, the 'pan' servo motor is set to move a fixed step size. Similarly, if the difference in 'y' is greater than the threshold, the 'tilt' servo motor is set to move a fixed step size.
